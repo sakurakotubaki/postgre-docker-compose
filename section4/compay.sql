@@ -51,3 +51,13 @@ WHERE position <> 'Developer' AND hire_date >= '2020-01-01'
 
 -- 重複しない役職(position)をアルファベット順で取得 --
 SELECT DISTINCT position FROM employees ORDER BY position;
+
+-- ageにindexを作成 --
+-- age列でも検索が高速化された --
+CREATE INDEX idx_employees_age ON employees(age);
+
+-- EXPLAINを使用してクエリの実行計画を確認 --
+EXPLAIN SELECT * FROM employees WHERE age >= 30;
+
+-- EXPLAIN ANALYZEを使用してクエリの実行計画と実行時間を確認 --
+EXPLAIN ANALYZE SELECT * FROM employees WHERE age >= 30;
