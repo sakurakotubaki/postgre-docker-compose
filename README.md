@@ -99,3 +99,53 @@ SELECT * FROM employees;
 ```
 
 <img src="assets/create-db.png" />
+
+## コマンドラインで起動する場合
+1. VSCocde Dockerのアイコンをクリック
+2. PostgreSQLコンテナを右クリック
+3. Attach Shellをクリック
+4. ターミナルが起動する
+USER_NAME=postgres # ユーザー名
+5. psql -U postgresを入力
+
+```sql
+psql -U postgres
+```
+
+データベースとテーブルを作成している場合
+```sql
+\c company_db
+```
+
+```sql
+CREATE DATABASE company_db;
+```
+
+```sql
+CREATE TABLE employees (
+    employee_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER,
+    position TEXT
+);
+```
+
+```sh
+\d employees;
+```
+
+```sql
+You are now connected to database "company_db" as user "postgres".
+company_db=# \d employees;
+                                   Table "public.employees"
+   Column    |  Type   | Collation | Nullable |                    Default                     
+-------------+---------+-----------+----------+------------------------------------------------
+ employee_id | integer |           | not null | nextval('employees_employee_id_seq'::regclass)
+ name        | text    |           | not null | 
+ age         | integer |           |          | 
+ position    | text    |           |          | 
+Indexes:
+    "employees_pkey" PRIMARY KEY, btree (employee_id)
+
+company_db=# history
+```
